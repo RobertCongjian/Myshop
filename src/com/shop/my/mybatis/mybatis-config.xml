@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias alias="admin" type="com.shop.my.pojo.Admin"/>
+        <typeAlias alias="user" type="com.shop.my.pojo.User"/>
+        <typeAlias alias="goods" type="com.shop.my.pojo.Goods"/>
+        <typeAlias alias="goodsType" type="com.shop.my.pojo.GoodsType"/>
+        <typeAlias alias="notice" type="com.shop.my.pojo.Notice"/>
+        <typeAlias alias="order" type="com.shop.my.pojo.Order"/>
+    </typeAliases>
+    <mappers>
+        <mapper resource="com/shop/my/mybatis/admin/AdminMapper.xml"/>
+        <mapper resource="com/shop/my/mybatis/admin/AdminTypeMapper.xml"/>
+        <mapper resource="com/shop/my/mybatis/admin/AdminGoodsMapper.xml"/>
+        <mapper resource="com/shop/my/mybatis/admin/AdminUserMapper.xml"/>
+        <mapper resource="com/shop/my/mybatis/admin/AdminNoticeMapper.xml"/>
+        <mapper resource="com/shop/my/mybatis/admin/AdminOrderMapper.xml"/>
+        <mapper resource="com/shop/my/mybatis/before/IndexMapper.xml"/>
+        <mapper resource="com/shop/my/mybatis/before/UserMapper.xml"/>
+        <mapper resource="com/shop/my/mybatis/before/CarMapper.xml"/>
+        <mapper resource="com/shop/my/mybatis/before/OrderMapper.xml"/>
+        <mapper resource="com/shop/my/mybatis/before/UserCenterMapper.xml"/>
+
+    </mappers>
+</configuration>
+

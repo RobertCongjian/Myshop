@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.my.dao.UserCenterDao">
+
+
+    <select id="myOrder" resultType="map" parameterType="integer">
+        select *
+        from t_orderbase
+        where user_id = #{id};
+    </select>
+    <select id="myFocus" resultType="map" parameterType="integer">
+        select tg.*
+        from t_goods tg,
+             t_focus tf
+        where tg.id = tf.goods_id
+          and tf.user_id = #{id} ;
+    </select>
+
+    <select id="orderDetail" resultType="map" parameterType="integer">
+        select tg.*, tod.shoppingnum
+        from t_goods tg,
+             t_orderdetail tod
+        where tod.orderbase_id = #{ordersn}
+          and tg.id = tod.goods_id;
+    </select>
+
+
+</mapper>

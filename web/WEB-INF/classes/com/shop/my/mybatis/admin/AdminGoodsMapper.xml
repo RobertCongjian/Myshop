@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.my.dao.AdminGoodsDao">
+    <resultMap id="AdminGoodsMap" type="com.shop.my.pojo.Goods">
+        <id property="id" column="id"/>
+        <result property="gname" column="gname"/>
+        <result property="goprice" column="goprice"/>
+        <result property="grprice" column="grprice"/>
+        <result property="gstore" column="gstore"/>
+        <result property="gpicture" column="gpicture"/>
+        <result property="goodstype_id" column="goodstype_id"/>
+    </resultMap>
+
+    <!--查询所有商品-->
+    <select id="selectGoods" resultMap="AdminGoodsMap">
+        select * from t_goods
+    </select>
+
+    <!--分页查询所有商品-->
+    <select id="selectAllGoodsByPage" resultMap="AdminGoodsMap">
+        select *
+        from t_goods order by id limit #{start},#{limit};
+    </select>
+
+    <!-- 添加商品 -->
+    <insert id="addGoods" parameterType="Goods">
+        insert into t_goods (id,gname,goprice,grprice,gstore,gpicture,goodstype_id)
+        values (null, #{gname}, #{goprice}, #{grprice}, #{gstore}, #{gpicture}, #{goodstype_id})
+    </insert>
+
+    <!-- 根据id查询一个商品 -->
+    <select id="selectGoodsById"  resultType="Goods" parameterType="Integer">
+        select tg.*,gy.typename from t_goods tg,t_goodstype gy where tg.id=#{id} and tg.goodstype_id = gy.id
+    </select>
+
+    <!-- 删除多个商品 -->
+    <delete id="deleteGoods"  parameterType="List">
+        delete from t_goods where id in
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!-- 删除单个商品 -->
+    <delete id="deleteAGoods" parameterType="Integer">
+        delete from t_goods where id=#{id}
+    </delete>
+
+    <!-- 修改一个商品 -->
+    <update id="updateGoodsById" parameterType="Goods">
+        update t_goods
+        <set>
+            <if test="gname != null">
+                gname = #{gname},
+            </if>
+            <if test="goprice != null">
+                goprice = #{goprice},
+            </if>
+            <if test="grprice != null">
+                grprice = #{grprice},
+            </if>
+            <if test="gstore != null">
+                gstore = #{gstore},
+            </if>
+            <if test="gpicture != null">
+                gpicture = #{gpicture},
+            </if>
+            <if test="goodstype_id != null">
+                goodstype_id = #{goodstype_id},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <!-- 查询关联商品 -->
+    <select id="selectCartGoods" parameterType="Integer" resultType="map">
+        select * from t_shoppingcar where goods_id=#{id}
+    </select>
+    <select id="selectFocusGoods" parameterType="Integer" resultType="map">
+        select * from t_focus where goods_id=#{id}
+    </select>
+    <select id="selectOrderdetailGoods" parameterType="Integer" resultType="map">
+        select * from t_orderdetail where goods_id=#{id}
+    </select>
+
+
+
+
+</mapper>

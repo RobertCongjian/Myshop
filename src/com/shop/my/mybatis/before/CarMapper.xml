@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.my.dao.CartDao">
+
+    <!--关注商品-->
+    <insert id="focus" parameterType="map">
+        insert into t_focus (goods_id, user_id, focustime)
+        values (#{goodsId}, #{userId}, now());
+    </insert>
+
+    <!--是否已经关注-->
+    <select id="isFocus" resultType="map" parameterType="map">
+        select *
+        from t_focus
+        where goods_id = #{goodsId}
+          and user_id = #{userId}
+    </select>
+
+    <!--是否已添加购物车-->
+    <select id="isPutCart" resultType="map" parameterType="map">
+        select *
+        from t_shoppingcar
+        where goods_id = #{goodsId}
+          and user_id = #{userId}
+    </select>
+
+    <!--加入购物车-->
+    <insert id="putCart" parameterType="map">
+        insert into t_shoppingcar (user_id, goods_id, shoppingnum)
+        values (#{userId}, #{goodsId}, #{shoppingnum});
+    </insert>
+
+    <!--更新购物车-->
+    <update id="updateCart" parameterType="map">
+        update t_shoppingcar
+        set shoppingnum=shoppingnum + #{shoppingnum}
+        where user_id = #{userId}
+          and goods_id = #{goodsId};
+    </update>
+
+
+    <!--查询购物车-->
+    <select id="selectCart" resultType="map" parameterType="integer">
+        select tg.id, tg.gname, tg.gpicture, tg.grprice, ts.shoppingnum, ts.shoppingnum * tg.grprice smallsum
+        from t_goods tg,
+             t_shoppingcar ts
+        where tg.id = ts.goods_id
+          and ts.user_id = #{id};
+    </select>
+
+    <!--删除购物车-->
+    <delete id="deleteAgoods" parameterType="map">
+        delete
+        from t_shoppingcar
+        where user_id = #{userId}
+          and goods_id = #{goodsId}
+    </delete>
+
+    <!--清空购物车-->
+    <delete id="clear" parameterType="integer">
+        delete
+        from t_shoppingcar
+        where user_id = #{id}
+    </delete>
+
+</mapper>

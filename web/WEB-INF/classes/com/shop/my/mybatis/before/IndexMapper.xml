@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.my.dao.IndexDao">
+
+    <!--查询销售排行-->
+    <select id="getSaleOrder" resultType="map">
+        select sum(tod.shoppingnum) shopnumber,
+               tg.id                id,
+               tg.gname             gname,
+               tg.goprice           goprice,
+               tg.grprice           grprice,
+               tg.gpicture          gpicture
+        from t_goods tg
+                 left join t_orderdetail tod on tg.id = tod.goods_id
+        group by tg.id,
+                 tg.gname,
+                 tg.goprice,
+                 tg.grprice,
+                 tg.gpicture
+        order by shopnumber desc
+        limit 10
+    </select>
+
+    <!--人气排行-->
+    <select id="getFocusOrder" resultType="map">
+        select count(tf.goods_id) fn,
+               tg.id              id,
+               tg.gname           gname,
+               tg.grprice         grprice,
+               tg.gpicture        gpicture
+        from t_goods tg
+                 left join t_focus tf on tg.id = tf.goods_id
+        group by tg.id, tg.gname, tg.grprice, tg.gpicture
+        order by fn desc
+        limit 10
+    </select>
+
+    <!--公告-->
+    <select id="selectNotice" resultType="map">
+        select *
+        from t_notice
+        order by ntime desc
+    </select>
+
+    <!--最新商品-->
+    <select id="getLastedGoods" resultType="goods" parameterType="goods">
+        select tg.*, tgs.typename
+        from t_goods tg,
+        t_goodstype tgs
+        where tg.goodstype_id = tgs.id
+        <if test="id != 0">
+            and tgs.id = #{id}
+        </if>
+        order by tg.id DESC limit 15
+    </select>
+
+    <!-- 根据id查询一个商品 -->
+    <select id="selectGoodsById"  resultType="Goods" parameterType="Integer">
+        select tg.*,tgs.typename from t_goods tg,t_goodstype tgs where tg.id=#{id} and tg.goodstype_id = tgs.id
+    </select>
+
+    <!-- 首页搜索 -->
+    <select id="search" resultType="Goods" parameterType="String">
+        select tg.*, tgs.typename from t_goods tg,t_goodstype tgs where tg.goodstype_id = tgs.id
+                                                                   and tg.gname like concat('%',#{mykey},'%')
+    </select>
+
+
+
+
+</mapper>

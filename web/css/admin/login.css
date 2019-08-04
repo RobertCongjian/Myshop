@@ -1,0 +1,123 @@
+@CHARSET "UTF-8";
+
+html,body{
+	margin:0;
+    padding:0;
+    width:100%;
+}
+
+body{
+	font-size:12px;
+    font-family: "微软雅黑";
+    color:#333;
+    line-height:100%;
+    background: url(/images/admin/background1.jpg) center top repeat-x #FFF;
+    height:100%;
+}
+
+
+.box{
+	position:relative;
+    z-index:100;
+    margin:0 auto;
+    width:700px;
+    height:320px;
+    left:400px;
+    top:160px;
+    background:url(/images/admin/login.png) center top no-repeat;
+}
+
+.zhuangshi{
+	position:absolute;
+	top:5px;
+	left:170px;
+	
+}
+
+.wenzi{
+	position:absolute;
+	top:50px;
+	left:300px;
+	font-size:25px;
+	font-family: "微软雅黑";
+	font-weight:700;
+	text-shadow: -2px 2px 5px #9ce3fa;
+}
+label{
+	display:inline-block;
+    width:70px;
+    text-align:right;
+    padding-right:20px;
+    vertical-align:middle;
+}
+
+.name{
+	padding:10px;
+    font-size:14px;
+}
+.paw{
+	padding:10px;
+	font-size:14px;
+}
+
+.form{
+	padding-top:90px;
+	padding-left:170px;
+}
+
+.text{
+	filter:alpha(opacity=80);
+	-moz-opacity:0.8;opacity:0.8;
+}
+
+.submit{
+	border:none;
+	font-weight:bold;
+	color:#FFF;margin:25px 0 0 150px;
+	-webkit-border-radius:3px;-moz-border-radius:3px;
+	border-radius:3px;
+	-webkit-box-shadow: #CCC 0px 0px 5px;
+	-moz-box-shadow: #CCC 0px 0px 5px;
+	box-shadow: #CCC 0px 0px 5px;
+	background: #31b6e7;
+	cursor: pointer;
+	}
+.submit:hover{
+	background:#ff9229;
+}
+
+.submit{
+	padding:6px 20px;
+}
+
+.text{
+	border:1px solid #CCC;
+    padding:5px;
+    background-color:#FCFCFC;
+    line-height:14px;
+    width:220px;
+    font-size:12px;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    -webkit-box-shadow: #CCC 0px 0px 5px;
+    -moz-box-shadow: #CCC 0px 0px 5px;
+    box-shadow: #CCC 0px 0px 5px;
+    border:1px solid #CCC;
+    font-size:12px;
+}
+.text:focus{
+	border:1px solid #31b6e7;
+	background-color:#FFF;
+	-webkit-box-shadow: #CCC 0px 0px 5px;
+	-moz-box-shadow: #CCC 0px 0px 5px;
+	box-shadow: #0178a4 0px 0px 5px;
+}
+
+.text:hover{
+	background-color:#FFF;
+}
+
+	
+	
+	
